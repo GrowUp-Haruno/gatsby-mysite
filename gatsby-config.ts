@@ -3,7 +3,7 @@ import type { GatsbyConfig } from "gatsby";
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `gatsby-mysite`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://growup-haruno.github.io`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -31,7 +31,7 @@ const config: GatsbyConfig = {
       __key: 'images',
     },
   ],
-  pathPrefix: '/gatsby-mysite',
+  pathPrefix: process.env.GITHUB_ACTIONS ? '/gatsby-mysite' : '',
 };
 
 export default config;
