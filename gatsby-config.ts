@@ -1,4 +1,10 @@
-import type { GatsbyConfig } from "gatsby";
+import type { GatsbyConfig } from 'gatsby';
+
+const path = require('path');
+
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -30,6 +36,31 @@ const config: GatsbyConfig = {
       },
       __key: 'images',
     },
+    {
+      resolve: 'gatsby-source-microcms',
+      options: {
+        apiKey: process.env.API_KEY,
+        serviceId: 'harulog',
+        apis: [
+          {
+            endpoint: 'blogs',
+          },
+        ],
+      },
+    },
+    // {
+    //   resolve: `@imgix/gatsby`,
+    //   options: {
+    //     domain: 'images.microcms-assets.io',
+    //     fields: [
+    //       {
+    //         nodeType: 'MicrocmsBlog',
+    //         fieldName: 'featuredImage',
+    //         getUrl: (node) => node.url,
+    //       },
+    //     ],
+    //   },
+    // },
   ],
   pathPrefix: process.env.GITHUB_ACTIONS ? '/gatsby-mysite' : '',
 };
