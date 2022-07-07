@@ -19,7 +19,7 @@ const config: GatsbyConfig = {
     'gatsby-plugin-sass',
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sitemap',
+    // 'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -48,19 +48,6 @@ const config: GatsbyConfig = {
         ],
       },
     },
-    // {
-    //   resolve: `@imgix/gatsby`,
-    //   options: {
-    //     domain: 'images.microcms-assets.io',
-    //     fields: [
-    //       {
-    //         nodeType: 'MicrocmsBlog',
-    //         fieldName: 'featuredImage',
-    //         getUrl: (node) => node.url,
-    //       },
-    //     ],
-    //   },
-    // },
   ],
   pathPrefix: process.env.GITHUB_ACTIONS ? '/gatsby-mysite' : '',
 };
