@@ -40,6 +40,11 @@ export const query = graphql`
             id
             name
           }
+          eyecatchImg {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
+            }
+          }
         }
       }
     }

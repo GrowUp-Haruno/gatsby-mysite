@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import React from 'react';
 
 import { formatDate } from '../../libs/formatDate';
 import { articleCardType } from '../../models/microcms';
@@ -10,13 +11,22 @@ export const ArticleCard: React.FC<{ articleCard: articleCardType }> = ({ articl
   if (!articleCard.updatedAt) return null;
   if (!articleCard.categories) return null;
   if (!articleCard.eyecatch || !articleCard.eyecatch.url) return null;
+  if (
+    !articleCard.eyecatchImg ||
+    !articleCard.eyecatchImg.childImageSharp ||
+    !articleCard.eyecatchImg.childImageSharp.gatsbyImageData
+  )
+    return null;
 
   const createDate = formatDate(new Date(articleCard.createdAt));
   const updateDate = formatDate(new Date(articleCard.updatedAt));
 
+  const cardImg = getImage(articleCard.eyecatchImg.childImageSharp.gatsbyImageData);
+
   return (
     <article className="articleCard">
-      <img src={articleCard.eyecatch.url} alt="サムネイル１" />
+      {/* <img src={articleCard.eyecatch.url} alt="サムネイル１" /> */}
+      <GatsbyImage image={cardImg!} alt="カードイメージ"/>
       <div>
         <h3>{articleCard.subTitle}</h3>
         <h2>{articleCard.mainTitle}</h2>

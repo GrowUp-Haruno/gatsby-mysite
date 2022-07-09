@@ -29,7 +29,6 @@ export type microcmsDataType = {
   limit: number;
 };
 
+export type articleCardListType = Queries.IndexQuery['allMicrocmsBlogs']['edges'];
 
-export type articleCardListType = Queries.IndexQuery['allMicrocmsBlogs']['edges']
-
-export type articleCardType = articleCardListType[0]['node']
+export type articleCardType = articleCardListType[0]['node'];
