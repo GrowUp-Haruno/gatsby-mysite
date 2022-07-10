@@ -1,4 +1,4 @@
-import { GatsbyNode } from 'gatsby';
+import { GatsbyNode, Node } from 'gatsby';
 // import { Node } from 'domhandler';
 // import { Link } from 'gatsby';
 // import { categoryType, eyecatchType } from './src/models/microcms';
@@ -18,27 +18,27 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       eyecatchImg: File @link(from: "fields.microcmsImg")
     }
     `);
-  };
+};
 
 let flag = false;
-export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
+export const onCreateNode: GatsbyNode['onCreateNode'] = ({
   getNodesByType,
   getCache,
   actions: { createNode, createNodeField },
   createNodeId,
   getNode,
-  node
+  node,
 }) => {
-
-
   if (!flag) {
     const MicrocmsBlogsNodes = getNodesByType('MicrocmsBlogs');
+    // const MicrocmsBlogsNodes = getNodesByType('MicrocmsBlogs') as unknown as Array<Queries.MicrocmsBlogs>;
+
     if (MicrocmsBlogsNodes.length !== 0) {
       flag = true;
-
       MicrocmsBlogsNodes.forEach(async (node) => {
+        const eyecatch = node.eyecatch as { url: string };
         const fileNode = await createRemoteFileNode({
-          url: `${node.eyecatch.url}?q=100`,
+          url: `${eyecatch.url}?q=100`,
           parentNodeId: node.id,
           getCache,
           createNode,
@@ -47,14 +47,14 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             timeout: 10000,
           },
         });
-
         if (fileNode) {
           // この方式はダメだった
           // node.microcmsImg = fileNode.id;
-
           // これなら大丈夫
           createNodeField({ node, name: 'microcmsImg', value: fileNode.id });
         }
+        // if (node.eyecatch) {
+        // }
       });
     }
   }
