@@ -1,6 +1,6 @@
 import React from 'react';
 import { FC } from 'react';
-import { microCMSLoader } from '../../client';
+// import { microCMSLoader } from '../../client';
 
 export const h1: FC<{ children?: JSX.Element }> = (props) => <h1>{props.children}</h1>;
 export const h2: FC<{ children?: JSX.Element }> = (props) => <h2>{props.children}</h2>;
