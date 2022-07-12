@@ -1,19 +1,23 @@
 // JSX.Element(s)からimgタグを探してsrcを抽出後GraphQLに接続する
-const innerArticleImageExtract = (child: { [x: string]: any }) => {
+const innerArticleImageSrcExtract = (child: { [x: string]: any }) => {
   if (typeof child !== 'string' && child.type === 'img') {
     const childProps: { src: string } = child.props;
-    console.log(childProps.src);
+    return childProps.src;
   }
 };
 
-export const articleImageExtract = (element: JSX.Element) => {
+export const articleImageSrcExtract = (element: JSX.Element) => {
+  let srcList: Array<string> = [];
   if (element.props.children instanceof Array) {
     const childList: Array<{ [x: string]: any }> = element.props.children;
     childList.forEach((child) => {
-      innerArticleImageExtract(child);
+      const src = innerArticleImageSrcExtract(child);
+      if (typeof src === 'string') srcList.push(src);
     });
   } else {
     const child = element.props.children;
-    innerArticleImageExtract(child);
+    const src = innerArticleImageSrcExtract(child);
+    if (typeof src === 'string') srcList.push(src);
   }
+  return srcList;
 };
