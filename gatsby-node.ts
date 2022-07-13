@@ -77,6 +77,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
                     },
                   });
                   if (fileNode) {
+                    node.localFile___NODE = fileNode.id;
                     createNodeField({ node: fileNode, name: 'url', value: url });
                   }
                 });
@@ -99,6 +100,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
                   },
                 });
                 if (fileNode) {
+                  node.localFile___NODE = fileNode.id;
                   createNodeField({ node: fileNode, name: 'url', value: url });
                 }
               });
