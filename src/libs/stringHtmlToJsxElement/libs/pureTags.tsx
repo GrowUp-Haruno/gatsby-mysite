@@ -1,5 +1,6 @@
 import React from 'react';
 import { FC } from 'react';
+import { GatsbyImageGenerator } from '../../../components/GatsbyImageGenerator';
 // import { microCMSLoader } from '../../client';
 
 export const h1: FC<{ children?: JSX.Element }> = (props) => <h1>{props.children}</h1>;
@@ -17,5 +18,5 @@ export const a: FC<{
 }> = (props) => <a href={props.anchorAttr?.href}>{props.children}</a>;
 export const img: FC<{ imgAttr?: React.ImgHTMLAttributes<HTMLImageElement> }> = (props) => {
   // return <Image loader={microCMSLoader} src={props.imgAttr?.src!} alt={props.imgAttr?.alt!} width={360} height={189} />;
-  return <></>;
+  return <GatsbyImageGenerator url={props.imgAttr?.src!} alt={props.imgAttr?.alt!} />;
 };
