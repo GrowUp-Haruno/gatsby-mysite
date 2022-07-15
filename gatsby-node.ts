@@ -2,6 +2,32 @@ import { articleImageSrcExtract } from './src/libs/articleImageExtract/index';
 import { GatsbyNode, Node } from 'gatsby';
 import parth from 'html-react-parser';
 import { createRemoteFileNode } from 'gatsby-source-filesystem';
+import path from 'path';
+
+export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql, reporter }) => {
+  const { createPage } = actions;
+  const result = await graphql<Queries.BlogIdListQuery>(`
+    query BlogIdList {
+      allMicrocmsBlogs {
+        edges {
+          node {
+            blogsId
+            id
+          }
+        }
+      }
+    }
+  `);
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    return;
+  }
+  if (!result.data) return 
+  result.data.allMicrocmsBlogs.edges.forEach((edge) => {
+    console.log(edge.node.blogsId);
+    createPage({ path: `/blogs/post/${edge.node.blogsId}`,component:path.resolve("./src/templates/articleTemplate.tsx"),context:{id:edge.node.id} });
+  })
+};
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = ({ actions }) => {
   const { createTypes } = actions;
