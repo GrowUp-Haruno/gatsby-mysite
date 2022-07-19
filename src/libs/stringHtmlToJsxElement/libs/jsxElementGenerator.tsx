@@ -102,15 +102,24 @@ const innerJsxElementGenerator = (
       const results = list.splice(0, listCount);
 
       // 内容をセットする
-      resultElements.push(
-        <Component>
-          <>
-            {results.map((result, index) => {
-              return <Fragment key={index}>{resultsMap(result)}</Fragment>;
-            })}
-          </>
-        </Component>
-      );
+
+      if (results[0].name !== 'img') {
+        resultElements.push(
+          <Component>
+            <>
+              {results.map((result, index) => {
+                return <Fragment key={index}>{resultsMap(result)}</Fragment>;
+              })}
+            </>
+          </Component>
+        );  
+      } else {
+        resultElements.push(
+          <Fragment>
+            {resultsMap(results[0])}
+          </Fragment>
+        )
+      }
     } else {
       // 主にbrなど不要なタグを削除
       list.splice(0, 1);

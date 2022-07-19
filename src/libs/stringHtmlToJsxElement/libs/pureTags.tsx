@@ -17,6 +17,5 @@ export const a: FC<{
   anchorAttr?: React.AnchorHTMLAttributes<HTMLAnchorElement>;
 }> = (props) => <a href={props.anchorAttr?.href}>{props.children}</a>;
 export const img: FC<{ imgAttr?: React.ImgHTMLAttributes<HTMLImageElement> }> = (props) => {
-  // return <Image loader={microCMSLoader} src={props.imgAttr?.src!} alt={props.imgAttr?.alt!} width={360} height={189} />;
   return <GatsbyImageGenerator url={props.imgAttr?.src!} alt={props.imgAttr?.alt!} />;
 };
