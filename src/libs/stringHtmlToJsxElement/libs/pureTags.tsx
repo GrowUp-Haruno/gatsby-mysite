@@ -19,3 +19,8 @@ export const a: FC<{
 export const img: FC<{ imgAttr?: React.ImgHTMLAttributes<HTMLImageElement> }> = (props) => {
   return <GatsbyImageGenerator url={props.imgAttr?.src!} alt={props.imgAttr?.alt!} />;
 };
+export const em: FC<{ children?: JSX.Element }> = (props) => <em>{props.children}</em>;
+export const s: FC<{ children?: JSX.Element }> = (props) => <s>{props.children}</s>;
+export const u: FC<{ children?: JSX.Element }> = (props) => <u>{props.children}</u>;
+// snippet
+// export const : FC<{ children?: JSX.Element }> = (props) => <>{props.children}</>;

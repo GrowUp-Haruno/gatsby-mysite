@@ -1,11 +1,10 @@
-
 import { Element } from 'html-react-parser';
 import { Text, Node } from 'domhandler';
 import { FC, Fragment } from 'react';
 
 import React from 'react';
 
-import { a, h1, h2, h3, h4, h5, img, li, p, strong, ul } from './pureTags';
+import { a, em, h1, h2, h3, h4, h5, img, li, p, s, strong, u, ul } from './pureTags';
 
 export const jsxElementGenerator = (domNode: Element) => {
   const resultElements: Array<JSX.Element> = [];
@@ -43,6 +42,19 @@ export const jsxElementGenerator = (domNode: Element) => {
     case 'img':
       innerJsxElementGenerator(domNode, resultElements, img);
       break;
+    case 'em':
+      innerJsxElementGenerator(domNode, resultElements, em);
+      break;
+    case 's':
+      innerJsxElementGenerator(domNode, resultElements, s);
+      break;
+    case 'u':
+      innerJsxElementGenerator(domNode, resultElements, u);
+      break;
+    // snippet
+    // case '':
+    //   innerJsxElementGenerator(domNode, resultElements, );
+    //   break;
     default:
       console.log(`${domNode.name}が未定義です`);
       break;
@@ -112,13 +124,9 @@ const innerJsxElementGenerator = (
               })}
             </>
           </Component>
-        );  
+        );
       } else {
-        resultElements.push(
-          <Fragment>
-            {resultsMap(results[0])}
-          </Fragment>
-        )
+        resultElements.push(<Fragment>{resultsMap(results[0])}</Fragment>);
       }
     } else {
       // 主にbrなど不要なタグを削除
