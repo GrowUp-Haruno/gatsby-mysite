@@ -22,5 +22,6 @@ export const img: FC<{ imgAttr?: React.ImgHTMLAttributes<HTMLImageElement> }> = 
 export const em: FC<{ children?: JSX.Element }> = (props) => <em>{props.children}</em>;
 export const s: FC<{ children?: JSX.Element }> = (props) => <s>{props.children}</s>;
 export const u: FC<{ children?: JSX.Element }> = (props) => <u>{props.children}</u>;
+export const code: FC<{ children?: JSX.Element }> = (props) => <code>{props.children}</code>;
 // snippet
 // export const : FC<{ children?: JSX.Element }> = (props) => <>{props.children}</>;

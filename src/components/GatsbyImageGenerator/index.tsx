@@ -13,7 +13,7 @@ export const GatsbyImageGenerator: React.FC<{ url: string; alt: string }> = ({ u
           node {
             url
             childImageSharp {
-              gatsbyImageData
+              gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
             }
           }
         }

@@ -4,7 +4,7 @@ import { FC, Fragment } from 'react';
 
 import React from 'react';
 
-import { a, em, h1, h2, h3, h4, h5, img, li, p, s, strong, u, ul } from './pureTags';
+import { a, code, em, h1, h2, h3, h4, h5, img, li, p, s, strong, u, ul } from './pureTags';
 
 export const jsxElementGenerator = (domNode: Element) => {
   const resultElements: Array<JSX.Element> = [];
@@ -51,6 +51,9 @@ export const jsxElementGenerator = (domNode: Element) => {
     case 'u':
       innerJsxElementGenerator(domNode, resultElements, u);
       break;
+      case 'code':
+        innerJsxElementGenerator(domNode, resultElements, code);
+        break;
     // snippet
     // case '':
     //   innerJsxElementGenerator(domNode, resultElements, );
