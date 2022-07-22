@@ -1,17 +1,16 @@
 import { graphql, PageProps } from 'gatsby';
 import React, { FC } from 'react';
 import { Header } from '../components/Header/Header';
-import { stringHtmlToJsxElement } from '../libs/stringHtmlToJsxElement';
+import { StringHtmlToJsxElement } from '../libs/stringHtmlToJsxElement';
+import './articleTemplate.scss';
 
 const ArticleTemplate: FC<PageProps<Queries.ArticleTemplateQuery>> = ({ data }) => {
-  if (!data) return null;
-  if (!data.microcmsBlogs || !data.microcmsBlogs.content) return null;
-  const blog = stringHtmlToJsxElement(data.microcmsBlogs.content);
+  const blog = StringHtmlToJsxElement(data);
 
   return (
     <>
-      <Header />
-      <title>Create Next App</title>
+      {/* <Header />
+      <title>Create Next App</title> */}
       <main>{blog}</main>
     </>
   );
