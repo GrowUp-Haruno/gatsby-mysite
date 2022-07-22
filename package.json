@@ -27,6 +27,7 @@
     "gatsby-source-microcms": "^2.0.0",
     "gatsby-transformer-sharp": "^4.18.0",
     "html-react-parser": "^2.0.0",
+    "modern-css-reset": "^1.4.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-helmet": "^6.1.0",
