@@ -16,6 +16,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@chakra-ui/gatsby-plugin": "^3.0.1",
+    "@chakra-ui/react": "^2.2.4",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@fontsource/noto-sans-jp": "^4.5.10",
+    "framer-motion": "^6.5.1",
     "gatsby": "^4.18.0",
     "gatsby-plugin-image": "^2.18.0",
     "gatsby-plugin-manifest": "^4.18.0",
@@ -27,11 +33,9 @@
     "gatsby-source-microcms": "^2.0.0",
     "gatsby-transformer-sharp": "^4.18.0",
     "html-react-parser": "^2.0.0",
-    "modern-css-reset": "^1.4.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-helmet": "^6.1.0",
-    "sass": "^1.53.0"
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "@types/node": "^18.0.3",
