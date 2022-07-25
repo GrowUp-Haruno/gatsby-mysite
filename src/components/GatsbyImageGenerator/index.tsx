@@ -23,7 +23,6 @@ export const GatsbyImageGenerator: React.FC<JSX.IntrinsicElements['img']> = (pro
   `);
 
   if (props.src === '') return null;
-  // const result = allFile.edges.filter((element) => element.node.url === `${url}?q=100`)[0].node.childImageSharp;
   const result = allFile.edges.filter((element) => element.node.url === `${props.src}?q=100`);
   if (result.length === 0) return null;
 

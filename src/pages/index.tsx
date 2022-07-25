@@ -3,17 +3,17 @@ import { graphql, PageProps } from 'gatsby';
 
 import { ArticleCardList } from '../components/Article/ArticleCardList';
 import { Header } from '../components/Header/Header';
+import { Box, ChakraProvider, Text } from '@chakra-ui/react';
+import theme from '../@chakra-ui/gatsby-plugin/theme';
 
 const Home: React.FC<PageProps<Queries.IndexQuery>> = ({ data }) => {
-  console.log(data.allMicrocmsBlogs.edges);
   return (
-    <>
+    <ChakraProvider theme={theme}>
       <Header />
-      <title>Create Next App</title>
-      <main>
+      <Box as="main" w={[360,580,1000]}>
         <ArticleCardList articleCardList={data.allMicrocmsBlogs.edges} />
-      </main>
-    </>
+      </Box>
+    </ChakraProvider>
   );
 };
 
@@ -25,6 +25,7 @@ export const query = graphql`
       edges {
         node {
           id
+          blogsId
           createdAt
           updatedAt
           mainTitle

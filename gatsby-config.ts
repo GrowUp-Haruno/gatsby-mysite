@@ -16,6 +16,7 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    `gatsby-plugin-fontawesome-css`,
     {
       resolve: '@chakra-ui/gatsby-plugin',
       options: {

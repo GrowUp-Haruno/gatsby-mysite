@@ -21,7 +21,7 @@ const theme: {
       main: {
         minHeight: '100vh',
         margin: '56px auto 0 auto',
-        backgroundColor: 'var(--chakra-colors-main)',
+        backgroundColor: 'var(--chakra-colors-base)',
         width: 'var(--width-pc)',
       },
     },
