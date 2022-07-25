@@ -1,19 +1,13 @@
 import { graphql, PageProps } from 'gatsby';
 import React, { FC } from 'react';
-import { Header } from '../components/Header/Header';
+
+import { BaseLayout } from '../components/Layout/BaseLayout';
 import { StringHtmlToJsxElement } from '../libs/stringHtmlToJsxElement';
-import './articleTemplate.scss';
 
 const ArticleTemplate: FC<PageProps<Queries.ArticleTemplateQuery>> = ({ data }) => {
   const blog = StringHtmlToJsxElement(data);
 
-  return (
-    <>
-      {/* <Header />
-      <title>Create Next App</title> */}
-      <main>{blog}</main>
-    </>
-  );
+  return <BaseLayout>{blog}</BaseLayout>;
 };
 
 export const query = graphql`
