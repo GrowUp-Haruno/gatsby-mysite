@@ -1,4 +1,10 @@
-import type { GatsbyConfig } from "gatsby";
+import type { GatsbyConfig } from 'gatsby';
+
+const path = require('path');
+
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -10,10 +16,25 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
-    'gatsby-plugin-sass',
+    `gatsby-plugin-fontawesome-css`,
+    {
+      resolve: '@chakra-ui/gatsby-plugin',
+      options: {
+        /**
+         * @property {boolean} [resetCSS=true]
+         * if false, this plugin will not use `<CSSReset />
+         */
+        resetCSS: true,
+        /**
+         * @property {boolean} [isUsingColorMode=true]
+         * if false, this plugin will not use <ColorModeProvider />
+         */
+        isUsingColorMode: true,
+      },
+    },
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sitemap',
+    // 'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -29,6 +50,18 @@ const config: GatsbyConfig = {
         path: './src/images/',
       },
       __key: 'images',
+    },
+    {
+      resolve: 'gatsby-source-microcms',
+      options: {
+        apiKey: process.env.API_KEY,
+        serviceId: 'harulog',
+        apis: [
+          {
+            endpoint: 'blogs',
+          },
+        ],
+      },
     },
   ],
   pathPrefix: process.env.GITHUB_ACTIONS ? '/gatsby-mysite' : '',
