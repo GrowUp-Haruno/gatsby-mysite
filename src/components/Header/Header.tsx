@@ -1,6 +1,7 @@
-import { Box, Flex, HStack } from '@chakra-ui/react';
-import * as React from 'react';
-
+import { Box, Flex, HStack } from "@chakra-ui/react";
+import { Link } from "gatsby";
+import * as React from "react";
+import theme from "../../@chakra-ui/gatsby-plugin/theme";
 
 export const Header = () => {
   return (
@@ -11,12 +12,23 @@ export const Header = () => {
       top="-56px"
       width="100%"
       height="96px"
-      borderBottom="1px solid var(--chakra-colors-accent)"
+      borderBottom="1px"
+      borderBottomStyle='solid'
+      borderBottomColor="accent"
       padding="0 2rem"
-      backgroundColor="var(--chakra-colors-base)"
+      backgroundColor="base"
     >
-      <Flex flexGrow={1} position="sticky" height="40px" justifyContent="space-between" alignItems="center" top={0}>
-        <Box fontSize="1.5rem">Logo</Box>
+      <Flex
+        flexGrow={1}
+        position="sticky"
+        height="40px"
+        justifyContent="space-between"
+        alignItems="center"
+        top={0}
+      >
+        <Box fontSize="1.5rem">
+          <Link to="/">Logo</Link>
+        </Box>
         <HStack>
           <Box>Blog</Box>
         </HStack>

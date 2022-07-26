@@ -1,37 +1,32 @@
-import { extendTheme, ChakraTheme } from '@chakra-ui/react';
-import '@fontsource/noto-sans-jp';
+import { extendTheme, ChakraTheme } from "@chakra-ui/react";
+import "@fontsource/noto-sans-jp";
 
 const theme: {
-  styles: ChakraTheme['styles'];
-  colors: ChakraTheme['colors'];
+  styles: ChakraTheme["styles"];
+  colors: ChakraTheme["colors"];
+  fonts: ChakraTheme["fonts"];
 } = {
   styles: {
     global: {
-      'html, body': {
-        fontFamily: 'Noto Sans JP, sans-serif',
-        fontSize: '16px',
-        color: 'var(--chakra-colors-paragraph)',
-        backgroundColor: 'var(--chakra-colors-base)',
-        width: '100%',
+      "html, body": {
+        color: "var(--chakra-colors-paragraph)",
+        backgroundColor: "base",
+        lineHeight: "tall",
       },
       a: {
-        color: 'inherits',
-        textDecoration: 'none',
-      },
-      main: {
-        minHeight: '100vh',
-        margin: '56px auto 0 auto',
-        backgroundColor: 'var(--chakra-colors-base)',
-        width: 'var(--width-pc)',
+        textDecoration: "none",
       },
     },
   },
   colors: {
-    base: '#ffffff',
-    main: '#f4f4f4',
-    accent: '#42c2ff',
-    paragraph: '#333333',
-    heading: '#2a2a2a',
+    base: "#FFFFFF",
+    main: "#EEF2F3",
+    accent: "#87CEFA",
+    paragraph: "#333333",
+    heading: "#2a2a2a",
+  },
+  fonts: {
+    body: "Noto Sans JP, sans-serif",
   },
 };
 
