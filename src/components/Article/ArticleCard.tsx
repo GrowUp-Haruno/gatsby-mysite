@@ -1,13 +1,12 @@
-import { Box, Heading, HStack, Tag, VStack } from "@chakra-ui/react";
+import React from "react";
+import { Link } from "gatsby";
+import { Heading, HStack, Tag, VStack } from "@chakra-ui/react";
 import { faArrowsRotate, faFilePen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "gatsby";
-import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
-import React from "react";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { formatDate } from "../../libs/formatDate";
 import { articleCardType } from "../../models/microcms";
-// import './ArticleCard.scss';
 
 export const ArticleCard: React.FC<{ articleCard: articleCardType }> = ({
   articleCard,
@@ -33,26 +32,22 @@ export const ArticleCard: React.FC<{ articleCard: articleCardType }> = ({
 
   return (
     <Link to={`/blogs/post/${articleCard.blogsId}`}>
-      <VStack
-        as="article"
-        w="100%"
-        h="100%"
-        // border='2px'
-        // borderColor='accent'
-        // backgroundColor="var(--chakra-colors-main)"
-      >
+      <VStack as="article" w="100%" h="100%">
         <GatsbyImage
           image={cardImg!}
           alt={`${articleCard.mainTitle}のサムネイル`}
         />
         <VStack spacing="16px" p={6} width="100%" align="left" flexGrow={1}>
-          {/* <Heading as="h3" size="xs">
-            {articleCard.subTitle}
-          </Heading> */}
           <Heading as="h3" size="md">
             {articleCard.mainTitle}
           </Heading>
-          <HStack fontSize={["md","md","xs","xs"]} justify="flex-start" align="center" spacing={4}>
+          {/* 作成日と更新日 */}
+          <HStack
+            fontSize={["md", "md", "xs", "xs"]}
+            justify="flex-start"
+            align="center"
+            spacing={4}
+          >
             <HStack spacing={1}>
               <FontAwesomeIcon icon={faFilePen} />
               <time dateTime={articleCard.createdAt!}>{createDate}</time>
