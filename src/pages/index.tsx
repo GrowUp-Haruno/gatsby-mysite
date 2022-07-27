@@ -24,7 +24,6 @@ export const query = graphql`
           createdAt
           updatedAt
           mainTitle
-          subTitle
           eyecatch {
             url
             width
