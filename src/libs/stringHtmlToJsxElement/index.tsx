@@ -34,24 +34,38 @@ const replace: HTMLReactParserOptions["replace"] = (domNode) => {
   ) {
     return <React.Fragment {...props} />;
   }
+  
+  // <p><br/></p>はmargin-topをつけない
+  if (
+    domNode.children[0] instanceof Element &&
+    domNode.children[0].name === "br"
+  ) {
+    return (
+      <Text as="p" {...props}>
+        <br />
+      </Text>
+    );
+  }
 
   if (name === "strong") return <Text as="strong" {...props} />;
   if (name === "code") return <Code {...props} />;
-  if (name === "h1") return <Heading as="h1" {...props} mt={8} mb={6} />;
+  // メインタイトルをh1としているため、重複しないようにh2に変換
+  if (name === "h1") return <Heading as="h2" {...props} mt={16} mb={6} />;
   if (name === "h2") return <Heading as="h2" {...props} mt={16} mb={6} />;
   if (name === "h3") return <Heading as="h3" {...props} mt={16} mb={6} />;
   if (name === "h4") return <Heading as="h4" {...props} />;
   if (name === "h5") return <Heading as="h5" {...props} />;
   if (name === "h6") return <Heading as="h6" {...props} />;
   if (name === "ul") return <List {...props} />;
-  if (name === "li") return <ListItem {...props} />;
+  if (name === "li") return <ListItem {...props} mt={1} />;
   if (name === "em") return <Text as="em" {...props} />;
   if (name === "a") return <CLink {...props} color="#0066CC" />;
-  if (name === "p") return <Text as="p" {...props} />;
+  if (name === "p") return <Text as="p" {...props} mt={4} />;
   if (name === "s") return <Text as="s" {...props} />;
   if (name === "u") return <Text as="u" {...props} />;
-  if (name === "img") return <GatsbyImageGenerator {...props} />;
   if (name === "br") return <br />;
+  if (name === "img")
+    return <GatsbyImageGenerator {...props} style={{ marginTop: "16px" }} />;
 
   console.log(`${domNode.name}が未定義です`);
   return null;
