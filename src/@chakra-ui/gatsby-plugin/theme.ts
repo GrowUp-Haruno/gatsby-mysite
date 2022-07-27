@@ -26,7 +26,8 @@ const theme: {
     heading: "#2a2a2a",
   },
   fonts: {
-    body: "Noto Sans JP, sans-serif",
+    body: `"ヒラギノ角ゴ ProN W3", HiraKakuProN-W3, 游ゴシック, "Yu Gothic", メイリオ, Meiryo, Verdana, Helvetica, Arial, sans-serif`,
+    heading: `"ヒラギノ角ゴ ProN W3", HiraKakuProN-W3, 游ゴシック, "Yu Gothic", メイリオ, Meiryo, Verdana, Helvetica, Arial, sans-serif`,
   },
 };
 
