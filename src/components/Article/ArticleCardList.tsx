@@ -2,8 +2,7 @@ import React from "react";
 
 import { ArticleCard } from "./ArticleCard";
 import { articleCardListType } from "../../models/microcms";
-// import './ArticleCardList.scss';
-import { Box, List, ListItem, SimpleGrid } from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 
 export const ArticleCardList: React.FC<{
   articleCardList: articleCardListType;
