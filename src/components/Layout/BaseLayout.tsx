@@ -2,7 +2,7 @@ import React from "react";
 import { Box, ChakraProps, ChakraProvider } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import theme from "../../@chakra-ui/gatsby-plugin/theme";
-import { Header } from "../Header/Header";
+import { Header } from "../Header";
 import { Footer } from "../Footer";
 
 // sm: "30em", // 480px (16pxの場合。以下同)

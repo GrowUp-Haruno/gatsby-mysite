@@ -7,7 +7,7 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <Stack spacing={4} align="center" py={5} bgColor="main">
+    <Stack spacing={4} align="center" py={10} bgColor="main">
       <Link to="/">
         <HStack _hover={{ opacity: 0.6 }} fontSize="2xl">
           <FontAwesomeIcon icon={faHouse} />
@@ -15,7 +15,7 @@ export const Footer = () => {
         </HStack>
       </Link>
 
-      <Text fontSize="sm">
+      <Text fontSize="sm" textAlign="center">
         Powered by{" "}
         <CLink href="https://www.gatsbyjs.com/">
           Gatsby.js
