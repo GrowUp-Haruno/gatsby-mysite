@@ -1,4 +1,4 @@
-name: Next.js mysit CICD
+name: Gatsby.js mysit CICD
 
 on:
   push:

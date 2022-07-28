@@ -3,6 +3,7 @@ import { Box, ChakraProps, ChakraProvider } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import theme from "../../@chakra-ui/gatsby-plugin/theme";
 import { Header } from "../Header/Header";
+import { Footer } from "../Footer";
 
 // sm: "30em", // 480px (16pxの場合。以下同)
 // md: "48em", // 768px
@@ -13,15 +14,18 @@ export const BaseLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <ChakraProvider theme={theme}>
       <Header />
-      <Box
-        maxW={maxW}
-        minHeight="100vh"
-        margin="56px auto 56px auto"
-        // backgroundColor="var(--chakra-colors-base)"
-        px={["16px", "0", "0", "0"]}
-      >
-        {children}
+      <Box pb={4}>
+        <Box
+          maxW={maxW}
+          minHeight="100vh"
+          margin="56px auto 56px auto"
+          // backgroundColor="var(--chakra-colors-base)"
+          px={["16px", "0", "0", "0"]}
+        >
+          {children}
+        </Box>
       </Box>
+      <Footer />
     </ChakraProvider>
   );
 };
