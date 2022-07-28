@@ -38,9 +38,8 @@ jobs:
       # - run: ls -a
 
       - name: Build
-        # env:
-        #   NEXT_PUBLIC_MICROCMS_SERVICEDOMAIN: ${{ secrets.NEXT_PUBLIC_MICROCMS_SERVICEDOMAIN }}
-        #   NEXT_PUBLIC_MICROCMS_APIKEY: ${{ secrets.NEXT_PUBLIC_MICROCMS_APIKEY }}
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
         run: yarn build
 
       - name: add .nojekyll
