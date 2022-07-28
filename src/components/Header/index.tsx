@@ -1,4 +1,4 @@
-import { Box, Flex, HStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Text } from "@chakra-ui/react";
 import { Link } from "gatsby";
 import * as React from "react";
 import theme from "../../@chakra-ui/gatsby-plugin/theme";
@@ -13,7 +13,7 @@ export const Header = () => {
       width="100%"
       height="96px"
       borderBottom="1px"
-      borderBottomStyle='solid'
+      borderBottomStyle="solid"
       borderBottomColor="accent"
       padding="0 2rem"
       backgroundColor="base"
@@ -26,11 +26,13 @@ export const Header = () => {
         alignItems="center"
         top={0}
       >
-        <Box fontSize="1.5rem">
-          <Link to="/">Logo</Link>
-        </Box>
+        <Text fontSize="1.5rem" fontFamily={`serif`} _hover={{ opacity: 0.6 }}>
+          <Link to="/">Grow Up</Link>
+        </Text>
         <HStack>
-          <Box>Blog</Box>
+          <Text fontSize="md" _hover={{ opacity: 0.6 }}>
+            <Link to="/">Blog</Link>
+          </Text>
         </HStack>
       </Flex>
     </HStack>
