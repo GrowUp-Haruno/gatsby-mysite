@@ -21,8 +21,10 @@ const ArticleTemplate: FC<PageProps<Queries.ArticleTemplateQuery>> = ({
   const createDate = formatDate(new Date(data.microcmsBlogs?.createdAt!));
   const updateDate = formatDate(new Date(data.microcmsBlogs?.updatedAt!));
 
+  console.log(data.microcmsBlogs?.eyecatchImg?.childImageSharp?.fluid?.src);
+
   return (
-    <BaseLayout>
+    <BaseLayout siteMetadata={data.site?.siteMetadata!}>
       {/* メインタイトル */}
       <Heading as="h1" size="2xl" mt={16} mb={6}>
         {data.microcmsBlogs?.mainTitle}
@@ -58,6 +60,16 @@ const ArticleTemplate: FC<PageProps<Queries.ArticleTemplateQuery>> = ({
 
 export const query = graphql`
   query ArticleTemplate($id: String!) {
+    site {
+      siteMetadata {
+        baseTitle
+        siteUrl
+        description
+        site
+        creator
+        twitterCard
+      }
+    }
     microcmsBlogs(id: { eq: $id }) {
       content
       mainTitle
@@ -66,6 +78,9 @@ export const query = graphql`
       eyecatchImg {
         childImageSharp {
           gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
+          fluid {
+            src
+          }
         }
       }
       categories {

@@ -6,7 +6,7 @@ import { BaseLayout } from '../components/Layout/BaseLayout';
 
 const Home: React.FC<PageProps<Queries.IndexQuery>> = ({ data }) => {
   return (
-    <BaseLayout>
+    <BaseLayout siteMetadata={data.site?.siteMetadata!}>
       <ArticleCardList articleCardList={data.allMicrocmsBlogs.edges} />
     </BaseLayout>
   );
@@ -16,6 +16,16 @@ export default Home;
 
 export const query = graphql`
   query Index {
+    site {
+      siteMetadata {
+        baseTitle
+        siteUrl
+        description
+        site
+        creator
+        twitterCard
+      }
+    }
     allMicrocmsBlogs {
       edges {
         node {
