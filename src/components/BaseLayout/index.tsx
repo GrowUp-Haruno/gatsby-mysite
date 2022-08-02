@@ -16,7 +16,8 @@ export const BaseLayout: React.FC<{
   siteMetadata: siteMetadataType;
   metaImgSrc?: string;
   ogType: ogType;
-}> = ({ children, siteMetadata, metaImgSrc, ogType }) => {
+  articleUrl?: string;
+}> = ({ children, siteMetadata, metaImgSrc, ogType,articleUrl }) => {
   const maxW: ChakraProps["maxW"] = [400, 400, 688, 912];
   return (
     <ChakraProvider theme={theme}>
@@ -24,6 +25,7 @@ export const BaseLayout: React.FC<{
         siteMetadata={siteMetadata}
         metaImgSrc={metaImgSrc}
         ogType={ogType}
+        articleUrl={articleUrl}
       />
       <Header />
       <Box pb={4}>
