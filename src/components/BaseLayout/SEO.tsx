@@ -1,11 +1,13 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import { siteMetadataType } from "../models/meta";
+import { ogType, siteMetadataType } from "../../models/meta";
 
-export const SEO: FC<{ siteMetadata: siteMetadataType }> = ({
-  siteMetadata,
-}) => {
-  const title = `${siteMetadata.baseTitle}`
+export const SEO: FC<{
+  siteMetadata: siteMetadataType;
+  metaImgSrc?: string;
+  ogType: ogType;
+}> = ({ siteMetadata, metaImgSrc, ogType }) => {
+  const title = `${siteMetadata.siteName} | `;
   return (
     <Helmet
       htmlAttributes={{ lang: "ja" }}
@@ -16,8 +18,10 @@ export const SEO: FC<{ siteMetadata: siteMetadataType }> = ({
         { name: "twitter:creator", content: `${siteMetadata.creator}` },
         { name: "og:url", content: `${siteMetadata.siteUrl}` },
         { name: "og:title", content: `${title}` },
+        { name: "og:site_name", content: `${siteMetadata.siteName}` },
         { name: "og:description", content: `${siteMetadata.description}` },
-        { name: "og:image", content: `${siteMetadata.siteUrl}` },
+        { name: "og:image", content: `${siteMetadata.siteUrl}${metaImgSrc}` },
+        { name: "og:type", content: ogType },
       ]}
     />
   );

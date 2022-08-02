@@ -22,7 +22,7 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
 
       # - name: 確認
@@ -40,6 +40,9 @@ jobs:
       - name: Build
         env:
           API_KEY: ${{ secrets.API_KEY }}
+          SITE_URL: ${{secrets.SITE_URL}}
+          TWITTER_SITE: ${{secrets.TWITTER_SITE}}
+          TWITTER_CREATOR: ${{secrets.TWITTER_CREATOR}}
         run: yarn build
 
       - name: add .nojekyll

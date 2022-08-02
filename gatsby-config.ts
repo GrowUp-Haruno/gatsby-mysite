@@ -8,11 +8,11 @@ require("dotenv").config({
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    baseTitle: `Grow Up`,
-    siteUrl: `https://growup-haruno.github.io/gatsby-mysite/`,
+    siteName: `Grow Up`,
+    siteUrl: process.env.SITE_URL,
     description: "学びで得た知識を日々アウトプットするブログ",
-    site: "@fullStackHaruno",
-    creator: "@fullStackHaruno",
+    site: process.env.TWITTER_SITE,
+    creator: process.env.TWITTER_CREATOR,
     twitterCard: "summary_large_image",
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
@@ -48,6 +48,7 @@ const config: GatsbyConfig = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
+      // src/images内のファイルをGraphQLから取得できるようにする
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",

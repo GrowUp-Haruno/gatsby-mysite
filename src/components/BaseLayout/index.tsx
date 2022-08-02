@@ -3,8 +3,8 @@ import { Box, ChakraProps, ChakraProvider } from "@chakra-ui/react";
 import theme from "../../@chakra-ui/gatsby-plugin/theme";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
-import { SEO } from "../SEO";
-import { siteMetadataType } from "../../models/meta";
+import { SEO } from "./SEO";
+import { ogType, siteMetadataType } from "../../models/meta";
 
 // sm: "30em", // 480px (16pxの場合。以下同)
 // md: "48em", // 768px
@@ -14,11 +14,17 @@ import { siteMetadataType } from "../../models/meta";
 export const BaseLayout: React.FC<{
   children: ReactNode;
   siteMetadata: siteMetadataType;
-}> = ({ children, siteMetadata }) => {
+  metaImgSrc?: string;
+  ogType: ogType;
+}> = ({ children, siteMetadata, metaImgSrc, ogType }) => {
   const maxW: ChakraProps["maxW"] = [400, 400, 688, 912];
   return (
     <ChakraProvider theme={theme}>
-      <SEO siteMetadata={siteMetadata} />
+      <SEO
+        siteMetadata={siteMetadata}
+        metaImgSrc={metaImgSrc}
+        ogType={ogType}
+      />
       <Header />
       <Box pb={4}>
         <Box
