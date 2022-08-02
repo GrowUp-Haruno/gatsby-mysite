@@ -40,6 +40,7 @@ jobs:
       - name: Build
         env:
           API_KEY: ${{ secrets.API_KEY }}
+          # githubのシークレットキーまたは.envで設定したメタデータを取得
           SITE_URL: ${{secrets.SITE_URL}}
           TWITTER_SITE: ${{secrets.TWITTER_SITE}}
           TWITTER_CREATOR: ${{secrets.TWITTER_CREATOR}}
