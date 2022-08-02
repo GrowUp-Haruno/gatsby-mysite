@@ -1,15 +1,19 @@
-import type { GatsbyConfig } from 'gatsby';
+import type { GatsbyConfig } from "gatsby";
 
-const path = require('path');
+// const path = require("path");
 
-require('dotenv').config({
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `gatsby-mysite`,
-    siteUrl: `https://growup-haruno.github.io`,
+    siteName: `Grow Up`,
+    siteUrl: process.env.SITE_URL,
+    description: "学びで得た知識を日々アウトプットするブログ",
+    site: process.env.TWITTER_SITE,
+    creator: process.env.TWITTER_CREATOR,
+    twitterCard: "summary_large_image",
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -18,7 +22,7 @@ const config: GatsbyConfig = {
   plugins: [
     `gatsby-plugin-fontawesome-css`,
     {
-      resolve: '@chakra-ui/gatsby-plugin',
+      resolve: "@chakra-ui/gatsby-plugin",
       options: {
         /**
          * @property {boolean} [resetCSS=true]
@@ -32,39 +36,40 @@ const config: GatsbyConfig = {
         isUsingColorMode: true,
       },
     },
-    'gatsby-plugin-image',
-    'gatsby-plugin-react-helmet',
-    // 'gatsby-plugin-sitemap',
+    "gatsby-plugin-image",
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-sitemap",
     {
-      resolve: 'gatsby-plugin-manifest',
+      resolve: "gatsby-plugin-manifest",
       options: {
-        icon: 'src/images/icon.png',
+        icon: "src/images/icon.png",
       },
     },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
     {
-      resolve: 'gatsby-source-filesystem',
+      // src/images内のファイルをGraphQLから取得できるようにする
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'images',
-        path: './src/images/',
+        name: "images",
+        path: "./src/images/",
       },
-      __key: 'images',
+      __key: "images",
     },
     {
-      resolve: 'gatsby-source-microcms',
+      resolve: "gatsby-source-microcms",
       options: {
         apiKey: process.env.API_KEY,
-        serviceId: 'harulog',
+        serviceId: "harulog",
         apis: [
           {
-            endpoint: 'blogs',
+            endpoint: "blogs",
           },
         ],
       },
     },
   ],
-  pathPrefix: process.env.GITHUB_ACTIONS ? '/gatsby-mysite' : '',
+  pathPrefix: process.env.GITHUB_ACTIONS ? "/gatsby-mysite" : "",
 };
 
 export default config;

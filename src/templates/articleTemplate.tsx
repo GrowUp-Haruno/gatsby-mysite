@@ -5,7 +5,7 @@ import { graphql, PageProps } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React, { FC } from "react";
 
-import { BaseLayout } from "../components/Layout/BaseLayout";
+import { BaseLayout } from "../components/BaseLayout";
 import { formatDate } from "../libs/formatDate";
 import { StringHtmlToJsxElement } from "../libs/stringHtmlToJsxElement";
 
@@ -21,8 +21,15 @@ const ArticleTemplate: FC<PageProps<Queries.ArticleTemplateQuery>> = ({
   const createDate = formatDate(new Date(data.microcmsBlogs?.createdAt!));
   const updateDate = formatDate(new Date(data.microcmsBlogs?.updatedAt!));
 
+  const metaImgSrc = data.microcmsBlogs?.metaImg?.childImageSharp?.fluid?.src;
+  const articleUrl = `/blogs/post/${data.microcmsBlogs?.blogsId}`;
   return (
-    <BaseLayout>
+    <BaseLayout
+      siteMetadata={data.site?.siteMetadata!}
+      metaImgSrc={metaImgSrc}
+      ogType="article"
+      articleUrl={articleUrl}
+    >
       {/* メインタイトル */}
       <Heading as="h1" size="2xl" mt={16} mb={6}>
         {data.microcmsBlogs?.mainTitle}
@@ -58,11 +65,29 @@ const ArticleTemplate: FC<PageProps<Queries.ArticleTemplateQuery>> = ({
 
 export const query = graphql`
   query ArticleTemplate($id: String!) {
+    site {
+      siteMetadata {
+        siteName
+        siteUrl
+        description
+        site
+        creator
+        twitterCard
+      }
+    }
     microcmsBlogs(id: { eq: $id }) {
       content
+      blogsId
       mainTitle
       createdAt
       updatedAt
+      metaImg: eyecatchImg {
+        childImageSharp {
+          fluid(maxWidth: 800, maxHeight: 418) {
+            src
+          }
+        }
+      }
       eyecatchImg {
         childImageSharp {
           gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
