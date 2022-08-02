@@ -9,6 +9,7 @@ export const SEO: FC<{
   articleUrl?: string;
 }> = ({ siteMetadata, metaImgSrc, ogType, articleUrl }) => {
   const title = `${siteMetadata.siteName} | `;
+  console.log(metaImgSrc);
   return (
     <Helmet
       htmlAttributes={{ lang: "ja" }}
@@ -30,3 +31,7 @@ export const SEO: FC<{
     />
   );
 };
+
+{
+  /* <meta name="twitter:card" content="summary_large_image"></meta> */
+}
