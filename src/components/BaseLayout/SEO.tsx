@@ -11,7 +11,6 @@ export const SEO: FC<{
   const title = `${siteMetadata.siteName} | `;
 
   console.log(siteMetadata.repositoryName);
-  console.log(metaImgSrc);
   return (
     <Helmet
       htmlAttributes={{ lang: "ja" }}
@@ -27,7 +26,7 @@ export const SEO: FC<{
         { name: "og:type", content: ogType },
         {
           name: "og:url",
-          content: `${siteMetadata.siteUrl}${articleUrl ? articleUrl : ""}`,
+          content: `${siteMetadata.siteUrl}${siteMetadata.repositoryName}${articleUrl ? articleUrl : ""}`,
         },
       ]}
     />
