@@ -44,6 +44,7 @@ jobs:
           SITE_URL: ${{secrets.SITE_URL}}
           TWITTER_SITE: ${{secrets.TWITTER_SITE}}
           TWITTER_CREATOR: ${{secrets.TWITTER_CREATOR}}
+          REPOSITORY_NAME: ${{secrets.REPOSITORY_NAME}}
         run: yarn build
 
       - name: add .nojekyll
