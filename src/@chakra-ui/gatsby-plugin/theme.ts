@@ -1,5 +1,4 @@
 import { extendTheme, ChakraTheme } from "@chakra-ui/react";
-import "@fontsource/noto-sans-jp";
 
 const theme: {
   styles: ChakraTheme["styles"];
