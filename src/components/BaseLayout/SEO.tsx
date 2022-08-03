@@ -9,6 +9,8 @@ export const SEO: FC<{
   articleUrl?: string;
 }> = ({ siteMetadata, metaImgSrc, ogType, articleUrl }) => {
   const title = `${siteMetadata.siteName} | `;
+
+  console.log(siteMetadata.repositoryName);
   console.log(metaImgSrc);
   return (
     <Helmet

@@ -25,6 +25,7 @@ export const query = graphql`
       siteMetadata {
         siteName
         siteUrl
+        repositoryName
         description
         site
         creator
