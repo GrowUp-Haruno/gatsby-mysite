@@ -72,7 +72,8 @@ const config: GatsbyConfig = {
       },
     },
   ],
-  pathPrefix: process.env.GITHUB_ACTIONS ? "/gatsby-mysite" : "",
+  pathPrefix: process.env.GITHUB_ACTIONS ? process.env.REPOSITORY_NAME : "",
+  // pathPrefix: process.env.GITHUB_ACTIONS ? "/gatsby-mysite" : "",
 };
 
 export default config;
