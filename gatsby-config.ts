@@ -10,9 +10,7 @@ const config: GatsbyConfig = {
   siteMetadata: {
     siteName: `Grow Up`,
     siteUrl: process.env.SITE_URL,
-    repositoryName: process.env.GITHUB_ACTIONS
-      ? process.env.REPOSITORY_NAME
-      : "",
+    repositoryName: process.env.GITHUB_ACTIONS ? "/gatsby-mysite" : "",
     description: "学びで得た知識を日々アウトプットするブログ",
     site: process.env.TWITTER_SITE,
     creator: process.env.TWITTER_CREATOR,
