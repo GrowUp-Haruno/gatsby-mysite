@@ -19,7 +19,7 @@ jobs:
 
       - name: 確認
         run: |
-          echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/src/') }}'
+          echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/') }}'
 
       # - uses: actions/cache@v3
       #   id: node_modules_cache_id
