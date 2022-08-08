@@ -1,10 +1,8 @@
-name: 動作テスト
+name: gatsby-mysite CICD(main brancheがトリガー)
 
 on:
   push:
     branches: GrowUp-Haruno/issue45
-  # repository_dispatch:
-  #   types: [microCMS-Webhook]
 
 jobs:
   gatsby-build-deploy:
@@ -17,32 +15,38 @@ jobs:
         with:
           node-version: 14
 
-      - name: 確認
-        run: echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/src/,**/gatsby-browser.js,**/gatsby-config.ts,**/gatsby-node.ts,**/yarn.lock') }}'
+      - uses: actions/cache@v3
+        id: gatsby_build_cache_id
+        with:
+          path: |
+            "**/.cache"
+            "**/public"
+          key: ${{ runner.os }}-gatsby-build-cache
 
-      # - uses: actions/cache@v3
-      #   id: node_modules_cache_id
-      #   env:
-      #     cache-name: cache-node-modules
-      #   with:
-      #     path: "**/node_modules"
-      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+      - uses: actions/cache@v3
+        id: node_modules_cache_id
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
 
-      # - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
-      #   run: yarn install
+      - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
+        run: yarn install
 
-      # - name: Build
-      #   env:
-      #     API_KEY: ${{ secrets.API_KEY }}
-      #     # githubのシークレットキーまたは.envで設定したメタデータを取得
-      #     SITE_URL: ${{secrets.SITE_URL}}
-      #     TWITTER_SITE: ${{secrets.TWITTER_SITE}}
-      #     TWITTER_CREATOR: ${{secrets.TWITTER_CREATOR}}
-      #     REPOSITORY_NAME: ${{secrets.REPOSITORY_NAME}}
-      #   run: yarn build
+      - name: Build
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          # githubのシークレットキーまたは.envで設定したメタデータを取得
+          SITE_URL: ${{secrets.SITE_URL}}
+          TWITTER_SITE: ${{secrets.TWITTER_SITE}}
+          TWITTER_CREATOR: ${{secrets.TWITTER_CREATOR}}
+          REPOSITORY_NAME: ${{secrets.REPOSITORY_NAME}}
+          GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
+        run: yarn build
 
-      # - name: add .nojekyll
-      #   run: touch ./public/.nojekyll
+      - name: add .nojekyll
+        run: touch ./public/.nojekyll
 
       # - name: Deploy
       #   uses: peaceiris/actions-gh-pages@v3
