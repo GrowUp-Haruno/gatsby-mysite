@@ -47,108 +47,63 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
     type MicrocmsBlogs implements Node {
       eyecatchImg: File @link(from: "fields.eyecatchImg")
     }
-    type File implements Node {
-      url: String
-    }
     `);
   };
 
-let flag = false;
-export const onCreateNode: GatsbyNode["onCreateNode"] = ({
-  getNodesByType,
-  getCache,
+export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
+  cache,
   actions: { createNode, createNodeField },
   createNodeId,
-  getNode,
-  node,
+  getNodesByType,
 }) => {
-  if (!flag) {
-    const MicrocmsBlogsNodes = getNodesByType("MicrocmsBlogs");
-    // const MicrocmsBlogsNodes = getNodesByType('MicrocmsBlogs') as unknown as Array<Queries.MicrocmsBlogs>;
+  const MicrocmsBlogsNodes = getNodesByType("MicrocmsBlogs");
 
-    if (MicrocmsBlogsNodes.length !== 0) {
-      flag = true;
-      // const fileNode = getNodesByType('File');
-      // console.log(fileNode);
+  // 記事からアイキャッチ画像を抽出してGraphQLに接続
+  for (const articleNode of MicrocmsBlogsNodes) {
+    const eyecatch = articleNode.eyecatch as { url: string };
+    const fileNode = await createRemoteFileNode({
+      url: `${eyecatch.url}?q=100`,
+      parentNodeId: articleNode.id,
+      cache,
+      createNode,
+      createNodeId,
+      httpHeaders: {
+        timeout: 10000,
+      },
+    });
+    if (fileNode) {
+      createNodeField({
+        node: articleNode,
+        name: "eyecatchImg",
+        value: fileNode.id,
+      });
+    }
 
-      MicrocmsBlogsNodes.forEach(async (node) => {
-        // eyecatchから画像データを抽出してGraphQLに接続
-        const eyecatch = node.eyecatch as { url: string };
-        const fileNode = await createRemoteFileNode({
-          url: `${eyecatch.url}?q=100`,
-          parentNodeId: node.id,
-          getCache,
-          createNode,
-          createNodeId,
-          httpHeaders: {
-            timeout: 10000,
-          },
-        });
-        if (fileNode) {
-          createNodeField({ node, name: "eyecatchImg", value: fileNode.id });
-          // createNodeField({
-          //   node: fileNode,
-          //   name: 'url',
-          //   value: eyecatch.url,
-          // });
-        }
+    // 記事から画像データを抽出してGraphQLに接続
+    const parthNodeTemp = parth(articleNode.content as string);
+    const parthNode: JSX.Element[] = [];
+    if (typeof parthNodeTemp === "object") {
+      // 型JSX.Elementを型JSX.Element[]にするための処理
+      if (!(parthNodeTemp instanceof Array)) parthNode.push(parthNodeTemp);
+      else parthNode.push(...parthNodeTemp);
 
-        // 記事から画像データを抽出してGraphQLに接続
-        // node.contentからJSX.Element(s)に変換
-        const parthNode = parth(node.content as string);
-        if (typeof parthNode === "object") {
-          // JSX.Element[]の時
-          if (parthNode instanceof Array) {
-            parthNode.forEach((element) => {
-              const urlList = articleImageSrcExtract(element);
-              if (urlList.length !== 0) {
-                urlList.forEach(async (url) => {
-                  const fileNode = await createRemoteFileNode({
-                    url: `${url}?q=100`,
-                    parentNodeId: node.id,
-                    getCache,
-                    createNode,
-                    createNodeId,
-                    httpHeaders: {
-                      timeout: 10000,
-                    },
-                  });
-                  if (fileNode) {
-                    node.localFile___NODE = fileNode.id;
-                    createNodeField({
-                      node: fileNode,
-                      name: "url",
-                      value: url,
-                    });
-                  }
-                });
-              }
+      for (const element of parthNode) {
+        const urlList = articleImageSrcExtract(element);
+        if (urlList.length !== 0) {
+          for (const url of urlList) {
+            await createRemoteFileNode({
+              url: `${url}?q=100`,
+              parentNodeId: articleNode.id,
+              cache,
+              createNode,
+              createNodeId,
+              httpHeaders: {
+                timeout: 10000,
+              },
             });
           }
-          // JSX.Elementの時
-          else {
-            const urlList = articleImageSrcExtract(parthNode);
-            if (urlList.length !== 0) {
-              urlList.forEach(async (url) => {
-                const fileNode = await createRemoteFileNode({
-                  url: `${url}?q=100`,
-                  parentNodeId: node.id,
-                  getCache,
-                  createNode,
-                  createNodeId,
-                  httpHeaders: {
-                    timeout: 10000,
-                  },
-                });
-                if (fileNode) {
-                  node.localFile___NODE = fileNode.id;
-                  createNodeField({ node: fileNode, name: "url", value: url });
-                }
-              });
-            }
-          }
         }
-      });
+      }
     }
   }
 };

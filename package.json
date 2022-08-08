@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "develop": "gatsby develop",
-    "start": "gatsby clean && gatsby develop",
-    "build": "gatsby clean && gatsby build --prefix-paths",
+    "start": "gatsby develop",
+    "build": "gatsby build --prefix-paths --log-pages",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit"
