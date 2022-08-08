@@ -1,5 +1,4 @@
-name: gatsby-mysite CICD(main brancheがトリガー)
-
+name: gatsby-mysite CICD
 on:
   push:
     branches: main
