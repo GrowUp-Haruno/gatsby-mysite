@@ -18,8 +18,7 @@ jobs:
           node-version: 14
 
       - name: 確認
-        run: |
-          echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/') }}'
+        run: echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/src/,**/gatsby-browser.js,**/gatsby-config.ts,**/gatsby-node.ts,**/yarn.lock') }}'
 
       # - uses: actions/cache@v3
       #   id: node_modules_cache_id
