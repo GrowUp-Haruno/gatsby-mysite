@@ -19,24 +19,19 @@ jobs:
 
       - name: 確認
         run: |
-          echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('*') }}'
+          echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./*') }}'
           ls -a
 
-      - uses: actions/cache@v3
-        id: node_modules_cache_id
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+      # - uses: actions/cache@v3
+      #   id: node_modules_cache_id
+      #   env:
+      #     cache-name: cache-node-modules
+      #   with:
+      #     path: "**/node_modules"
+      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
 
-      - name: 確認
-        run: |
-          echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('*') }}'
-          ls -a
-
-      - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
-        run: yarn install
+      # - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
+      #   run: yarn install
 
       # - name: Build
       #   env:
