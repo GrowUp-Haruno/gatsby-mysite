@@ -16,19 +16,14 @@ jobs:
         with:
           node-version: 14
 
-      - name: Get .cache
+      - name: Get .cache & public
         uses: actions/cache@v3
+        id: gatsby_build_cache_id
         with:
           path: |
-            "**/.cache”
+            .cache
+            public
           key: ${{ runner.os }}-gatsby-build-cache
-
-      - name: Get public
-        uses: actions/cache@v3
-        with:
-          path: |
-            "**/public”
-          key: ${{ runner.os }}-gatsby-build-public
 
       - name: Get node_modules cache
         uses: actions/cache@v3
