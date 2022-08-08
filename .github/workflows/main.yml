@@ -16,7 +16,8 @@ jobs:
         with:
           node-version: 14
 
-      - uses: actions/cache@v3
+      - name: Get .cache & public cache
+        uses: actions/cache@v3
         id: gatsby_build_cache_id
         with:
           path: |
@@ -24,13 +25,17 @@ jobs:
             public
           key: ${{ runner.os }}-gatsby-build-cache
 
-      - uses: actions/cache@v3
+      - name: Get node_modules cache
+        uses: actions/cache@v3
         id: node_modules_cache_id
         env:
           cache-name: cache-node-modules
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: check2
+        run: ls -a 
 
       - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: yarn install
@@ -46,9 +51,9 @@ jobs:
           GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
         run: yarn build
 
-      - name: check
+      - name: check2
         run: ls -a 
-        
+
       # - name: add .nojekyll
       #   run: touch ./public/.nojekyll
 
