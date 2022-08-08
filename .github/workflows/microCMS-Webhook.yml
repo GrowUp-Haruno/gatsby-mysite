@@ -1,10 +1,8 @@
-name: gatsby-mysite CICD(main brancheがトリガー)
+name: gatsby-mysite CICD(microCMS-Webhookがトリガー)
 
 on:
-  push:
-    branches: main
-  # repository_dispatch:
-  #   types: [microCMS-Webhook]
+  repository_dispatch:
+    types: [microCMS-Webhook]
 
 jobs:
   nextjs-build-deploy:
@@ -25,17 +23,8 @@ jobs:
           path: "**/node_modules"
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
 
-      # - name: 確認
-      #   run: echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}'
-
-      # - name: 確認その２
-      #   run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
-
       - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: yarn install
-
-      # - run: npm ls --depth=0
-      # - run: ls -a
 
       - name: Build
         env:
