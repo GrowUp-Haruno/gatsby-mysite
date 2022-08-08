@@ -34,7 +34,9 @@ jobs:
 
       - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: yarn install
-
+      
+      - name: check
+        run: ls -a 
       # - name: Build
       #   env:
       #     API_KEY: ${{ secrets.API_KEY }}
