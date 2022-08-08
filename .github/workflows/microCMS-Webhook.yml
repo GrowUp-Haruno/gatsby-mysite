@@ -5,7 +5,7 @@ on:
     types: [microCMS-Webhook]
 
 jobs:
-  nextjs-build-deploy:
+  gatsby-build-deploy:
     runs-on: ubuntu-latest
 
     steps:
