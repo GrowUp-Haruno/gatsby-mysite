@@ -36,7 +36,7 @@ jobs:
       #     key: ${{ runner.os }}-gatsby-build-${{ github.run_id }}
 
       # - name: 確認
-      run: echo '${{ runner.os }}-build-${{ env.cache-na  me }}-${{ hashFiles('**/*.*') }}'
+      run: echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/*.*') }}'
 
       - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: yarn install
