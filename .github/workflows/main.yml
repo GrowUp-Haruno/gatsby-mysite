@@ -17,6 +17,11 @@ jobs:
         with:
           node-version: 14
 
+      - name: 確認
+        run: |
+          echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('*') }}'
+          ls -a
+
       - uses: actions/cache@v3
         id: node_modules_cache_id
         env:
@@ -26,33 +31,29 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: 確認
-        run: echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('*') }}'
-
-      # - name: 確認その２
-      #   run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
+        run: |
+          echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('*') }}'
+          ls -a
 
       - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: yarn install
 
-      # - run: npm ls --depth=0
-      # - run: ls -a
+      # - name: Build
+      #   env:
+      #     API_KEY: ${{ secrets.API_KEY }}
+      #     # githubのシークレットキーまたは.envで設定したメタデータを取得
+      #     SITE_URL: ${{secrets.SITE_URL}}
+      #     TWITTER_SITE: ${{secrets.TWITTER_SITE}}
+      #     TWITTER_CREATOR: ${{secrets.TWITTER_CREATOR}}
+      #     REPOSITORY_NAME: ${{secrets.REPOSITORY_NAME}}
+      #   run: yarn build
 
-      - name: Build
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-          # githubのシークレットキーまたは.envで設定したメタデータを取得
-          SITE_URL: ${{secrets.SITE_URL}}
-          TWITTER_SITE: ${{secrets.TWITTER_SITE}}
-          TWITTER_CREATOR: ${{secrets.TWITTER_CREATOR}}
-          REPOSITORY_NAME: ${{secrets.REPOSITORY_NAME}}
-        run: yarn build
+      # - name: add .nojekyll
+      #   run: touch ./public/.nojekyll
 
-      - name: add .nojekyll
-        run: touch ./public/.nojekyll
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   if: ${{ github.ref == 'refs/heads/main' }}
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./public
