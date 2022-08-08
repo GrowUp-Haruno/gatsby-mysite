@@ -3,6 +3,8 @@ name: gatsby-mysite CICD(main brancheがトリガー)
 on:
   push:
     branches: GrowUp-Haruno/issue45
+  repository_dispatch:
+    types: [microCMS-Webhook]
 
 jobs:
   gatsby-build-deploy:
@@ -15,13 +17,13 @@ jobs:
         with:
           node-version: 14
 
-      - uses: actions/cache@v3
-        id: gatsby_build_cache_id
-        with:
-          path: |
-            "**/.cache"
-            "**/public"
-          key: ${{ runner.os }}-gatsby-build-cache
+      # - uses: actions/cache@v3
+      #   id: gatsby_build_cache_id
+      #   with:
+      #     path: |
+      #       "**/.cache"
+      #       "**/public"
+      #     key: ${{ runner.os }}-gatsby-build-cache
 
       - uses: actions/cache@v3
         id: node_modules_cache_id
@@ -43,6 +45,7 @@ jobs:
           TWITTER_CREATOR: ${{secrets.TWITTER_CREATOR}}
           REPOSITORY_NAME: ${{secrets.REPOSITORY_NAME}}
           GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
+
         run: yarn build
 
       - name: add .nojekyll
