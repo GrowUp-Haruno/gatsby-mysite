@@ -21,8 +21,8 @@ jobs:
         id: gatsby_build_cache_id
         with:
           path: |
-            .cache
-            public
+            "**/.cache”
+            "**/public”
           key: ${{ runner.os }}-gatsby-build-cache
 
       - name: Get node_modules cache
