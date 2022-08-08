@@ -23,6 +23,18 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    {
+      resolve: "gatsby-source-microcms",
+      options: {
+        apiKey: process.env.API_KEY,
+        serviceId: "harulog",
+        apis: [
+          {
+            endpoint: "blogs",
+          },
+        ],
+      },
+    },
     `gatsby-plugin-fontawesome-css`,
     {
       resolve: "@chakra-ui/gatsby-plugin",
@@ -58,18 +70,6 @@ const config: GatsbyConfig = {
         path: "./src/images/",
       },
       __key: "images",
-    },
-    {
-      resolve: "gatsby-source-microcms",
-      options: {
-        apiKey: process.env.API_KEY,
-        serviceId: "harulog",
-        apis: [
-          {
-            endpoint: "blogs",
-          },
-        ],
-      },
     },
   ],
   pathPrefix: process.env.GITHUB_ACTIONS ? process.env.REPOSITORY_NAME : "",
