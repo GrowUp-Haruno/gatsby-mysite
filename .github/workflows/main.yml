@@ -34,9 +34,6 @@ jobs:
           path: "**/node_modules"
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
 
-      - name: check
-        run: ls public 
-
       - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: yarn install
       
